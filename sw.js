@@ -1,5 +1,5 @@
 // Focus app shell: network first (latest version when online), cached copy when offline.
-const CACHE = 'focuspub-v2';
+const CACHE = 'focuspub-v3';
 const SHELL = ['./', './index.html', './manifest.webmanifest', './icons/mark.png', './icons/ee2e24/any-192.png', './icons/ee2e24/apple-180.png'];
 self.addEventListener('install', (e) => { e.waitUntil(caches.open(CACHE).then((c) => c.addAll(SHELL))); self.skipWaiting(); });
 self.addEventListener('activate', (e) => { e.waitUntil(caches.keys().then((ks) => Promise.all(ks.filter((k) => k.startsWith('focuspub-') && k !== CACHE).map((k) => caches.delete(k)))).then(() => self.clients.claim())); });
